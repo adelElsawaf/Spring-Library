@@ -7,11 +7,9 @@ import java.util.List;
 
 public class CsvFile {
     public File csvFileController;
-    public String fullFileLocation;
 
     public CsvFile(String fullFileLocation) {
         csvFileController = new File(fullFileLocation);
-        this.fullFileLocation = fullFileLocation;
     }
 
     public static List<String> read(String fileLocation) {
