@@ -38,26 +38,26 @@ public class User {
         usersFile.insert(Collections.singletonList(recent.firstName + "," + recent.lastName + "," + recent.userName + "," + recent.Password + "," + recent.type));
     }
 
-   public static void loadDataFromFile() {
+    public static void loadDataFromFile() {
         List<String> Data = CsvFile.read(User.FULL_FILE_LOCATION);
         for (int dataIndex = 0; dataIndex < Data.size(); dataIndex += 5) {
-            usersInfo.add(new User(Data.get(dataIndex),Data.get(dataIndex+1),Data.get(dataIndex+2),Data.get(dataIndex+3),Data.get(dataIndex+4)));
+            usersInfo.add(new User(Data.get(dataIndex), Data.get(dataIndex + 1), Data.get(dataIndex + 2), Data.get(dataIndex + 3), Data.get(dataIndex + 4)));
         }
     }
-   public static User logIn(String userName , String password)
-    {
+
+    public static User logIn(String userName, String password) {
         for (User loggedInUser : usersInfo) {
             if (loggedInUser.userName.equals(userName) && loggedInUser.Password.equals(password))
                 return loggedInUser;
         }
         return null;
     }
-    public static List<User> getAllUsers()
-    {
+
+    public static List<User> getAllUsers() {
         return User.usersInfo;
     }
-    public static User getUser(String userName)
-    {
+
+    public static User getUser(String userName) {
         for (User user : usersInfo) {
             if (user.userName.equals(userName))
                 return user;
@@ -65,5 +65,14 @@ public class User {
         return null;
     }
 
+    public static void update(User editedUser, String userName) {
+        User updatedUser = getUser(userName);
+        usersInfo.set(usersInfo.indexOf(updatedUser), editedUser);
+    }
+
+    public static void delete(String userName) {
+        User deletedUser = getUser(userName);
+        usersInfo.remove(deletedUser);
+    }
 }
 
