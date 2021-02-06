@@ -1,13 +1,18 @@
 package org.example;
 
-import java.util.Scanner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Scanner;
+@SpringBootApplication
 public class main {
 
-    public static Scanner input = new Scanner(System.in);
-
+    //public static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         User.loadDataFromFile();
+        SpringApplication.run(main.class, args);
+    }
+        /*User.loadDataFromFile();
         while (true) {
             String operation;
             System.out.println("To Register Please Press <1>");
@@ -25,7 +30,7 @@ public class main {
                     String password = input.nextLine();
                     System.out.println("Please enter the type of the user ");
                     String userType = input.nextLine();
-                    User.Register(firstName, lastName, userName, password, userType);
+                    User.Register(new User(firstName,lastName,userName,password,userType));
                     break;
                 case "2":
                     for (int i = 0; i < User.usersInfo.size(); i++) {
@@ -54,5 +59,5 @@ public class main {
                     break;
             }
         }
-    }
+    }*/
 }
