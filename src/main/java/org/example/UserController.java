@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userName}")
     public static void update(@RequestBody User recent, @PathVariable String userName) {
-        User.update(recent, userName);
+        User.Edit(recent, userName);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/delete/{userName}")

@@ -1,8 +1,10 @@
 package org.example;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 public class User {
     public static final String FULL_FILE_LOCATION = "CsvFiles/UsersData.csv";
@@ -33,9 +35,9 @@ public class User {
         CsvFile usersFile = new CsvFile(FULL_FILE_LOCATION);
         if (!usersFile.isExist()) {
             usersFile.create();
-            usersFile.insert(Collections.singletonList("First_Name,Last_Name,User_Name,Password,User_Type"));
+            usersFile.insertًWithAppend(Collections.singletonList("First_Name,Last_Name,User_Name,Password,User_Type"));
         }
-        usersFile.insert(Collections.singletonList(recent.firstName + "," + recent.lastName + "," + recent.userName + "," + recent.Password + "," + recent.type));
+        usersFile.insertًWithAppend(Collections.singletonList(recent.firstName + "," + recent.lastName + "," + recent.userName + "," + recent.Password + "," + recent.type));
     }
 
     public static void loadDataFromFile() {
@@ -65,14 +67,28 @@ public class User {
         return null;
     }
 
-    public static void update(User editedUser, String userName) {
+    public static void updateFile() {
+        CsvFile newFile = new CsvFile("CsvFiles/TempUsersData.csv");
+        newFile.create();
+        newFile.insertًWithAppend(Collections.singletonList("First_Name,Last_Name,User_Name,Password,User_Type"));
+        for (User user : usersInfo)
+            newFile.insertًWithAppend(Collections.singletonList(user.firstName + "," + user.lastName + "," + user.userName + "," + user.Password + "," + user.type));
+        File oldFile = new File(User.FULL_FILE_LOCATION);
+        oldFile.delete();
+        newFile.rename(oldFile);
+    }
+
+    public static void Edit(User editedUser, String userName) {
         User updatedUser = getUser(userName);
         usersInfo.set(usersInfo.indexOf(updatedUser), editedUser);
+        User.updateFile();
     }
+
 
     public static void delete(String userName) {
         User deletedUser = getUser(userName);
         usersInfo.remove(deletedUser);
+        User.updateFile();
     }
 }
 
