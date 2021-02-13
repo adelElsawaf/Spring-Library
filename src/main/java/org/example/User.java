@@ -68,14 +68,12 @@ public class User {
     }
 
     public static void updateFile() {
-        CsvFile newFile = new CsvFile("CsvFiles/TempUsersData.csv");
-        newFile.create();
-        newFile.insertًWithAppend(Collections.singletonList("First_Name,Last_Name,User_Name,Password,User_Type"));
+        CsvFile temp = new CsvFile("CsvFiles/TempUsersData.csv");
+        temp.create();
+        temp.insertًWithAppend(Collections.singletonList("First_Name,Last_Name,User_Name,Password,User_Type"));
         for (User user : usersInfo)
-            newFile.insertًWithAppend(Collections.singletonList(user.firstName + "," + user.lastName + "," + user.userName + "," + user.Password + "," + user.type));
-        File oldFile = new File(User.FULL_FILE_LOCATION);
-        oldFile.delete();
-        newFile.rename(oldFile);
+            temp.insertًWithAppend(Collections.singletonList(user.firstName + "," + user.lastName + "," + user.userName + "," + user.Password + "," + user.type));
+        temp.rename(User.FULL_FILE_LOCATION);
     }
 
     public static void Edit(User editedUser, String userName) {

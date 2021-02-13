@@ -56,8 +56,14 @@ public class CsvFile {
 
         }
     }
-    public void rename(File newFile)
+    private void delete()
     {
-        csvFileController.renameTo(newFile);
+        csvFileController.delete();
+    }
+    public void rename(String fileName)
+    {
+        File oldFile = new File(fileName);
+        oldFile.delete();
+        csvFileController.renameTo(oldFile);
     }
 }
