@@ -1,4 +1,4 @@
-package org.example;
+package org.library.System.User;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -56,12 +56,8 @@ public class CsvFile {
 
         }
     }
-    private void delete()
-    {
-        csvFileController.delete();
-    }
-    public void rename(String fileName)
-    {
+
+    public void rename(String fileName) {
         File oldFile = new File(fileName);
         oldFile.delete();
         csvFileController.renameTo(oldFile);

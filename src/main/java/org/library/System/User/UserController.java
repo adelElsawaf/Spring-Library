@@ -1,33 +1,39 @@
-package org.example;
+package org.library.System.User;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
+
 
 @RestController
 public class UserController {
+
     @RequestMapping("/users")
     public static List<User> getAllUsers() {
-        return User.getAllUsers();
+        return UserService.getAllUsers();
     }
 
     @RequestMapping("/users/{userName}")
-    public static User getUser(@PathVariable String userName) {
-        return User.getUser(userName);
+    public static Optional<User> getUser(@PathVariable String userName) {
+        return UserService.getUser(userName);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users/Register")
     public static void Register(@RequestBody User recent) {
-        User.Register(recent);
+        UserService.AddUser(recent);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userName}")
-    public static void update(@RequestBody User recent, @PathVariable String userName) {
-        User.Edit(recent, userName);
+    public static void update(@PathVariable String userName,@RequestBody User recent) {
+        UserService.EditUser(userName, recent);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/delete/{userName}")
     public static void delete(@PathVariable String userName) {
-        User.delete(userName);
+        UserService.deleteUser(userName);
     }
+
+
 }
