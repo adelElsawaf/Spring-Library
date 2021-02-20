@@ -1,4 +1,4 @@
-package org.example;
+package org.library.System.User;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CsvFile {
-    public File csvFileController;
+    public static File csvFileController;
 
     public CsvFile(String fullFileLocation) {
         csvFileController = new File(fullFileLocation);
@@ -26,7 +26,6 @@ public class CsvFile {
             }
             return rows;
         } catch (Exception e) {
-            System.out.println(e);
             return new ArrayList<>();
         }
     }
@@ -35,7 +34,7 @@ public class CsvFile {
         try {
             csvFileController.createNewFile();
         } catch (IOException ex) {
-            System.out.println(ex);
+            throw new Error(ex);
         }
     }
 
@@ -43,7 +42,8 @@ public class CsvFile {
         return csvFileController.exists() && !csvFileController.isDirectory();
     }
 
-    public void insert(List<String> rows) {
+    @SuppressWarnings("NonAsciiCharacters")
+    public void insertًWithAppend(List<String> rows) {
         try {
             FileWriter csvWriter = new FileWriter(csvFileController, true);
             for (String row : rows) {
@@ -52,9 +52,14 @@ public class CsvFile {
             csvWriter.flush();
             csvWriter.close();
         } catch (Exception e) {
-            System.out.println(e);
+            throw new Error(e);
 
         }
+    }
 
+    public void rename(String fileName) {
+        File oldFile = new File(fileName);
+        oldFile.delete();
+        csvFileController.renameTo(oldFile);
     }
 }
