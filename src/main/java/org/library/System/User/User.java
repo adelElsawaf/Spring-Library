@@ -1,17 +1,20 @@
 package org.library.System.User;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User {
-    private String firstName;
-    private String lastName;
     @Id
     private String userName;
     private String password;
+    private String firstName;
+    private String lastName;
     private UserType type;
 
     public User() {
