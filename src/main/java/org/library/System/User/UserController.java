@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @RestController
 public class UserController {
 
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userName}")
-    public static void update(@PathVariable String userName,@RequestBody User recent) {
+    public static void update(@PathVariable String userName, @RequestBody User recent) {
         UserService.EditUser(userName, recent);
     }
 
