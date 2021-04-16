@@ -4,34 +4,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
 public class UserController {
 
     @RequestMapping("/users")
-    public static List<User> getAllUsers() {
-        return UserService.getAllUsers();
+    public static List<User> readAllUsers() {
+        return UserService.readAllUsers();
     }
 
-    @RequestMapping("/users/{userName}")
-    public static Optional<User> getUser(@PathVariable String userName) {
-        return UserService.getUser(userName);
+    @RequestMapping("/users/{userId}")
+    public static Optional<User> readUser(@PathVariable UUID userId) {
+        return UserService.readUser(userId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users/Register")
-    public static void Register(@RequestBody User recent) {
-        UserService.AddUser(recent);
+    @RequestMapping(method = RequestMethod.POST, value = "/users")
+    public static void createUser(@RequestBody User recent) {
+        UserService.createUser(recent);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userName}")
-    public static void update(@PathVariable String userName, @RequestBody User recent) {
-        UserService.EditUser(userName, recent);
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}")
+    public static void updateUser(@PathVariable UUID userId, @RequestBody User recent) {
+        UserService.updateUser(userId, recent);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/delete/{userName}")
-    public static void delete(@PathVariable String userName) {
-        UserService.deleteUser(userName);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}")
+    public static void delete(@PathVariable UUID userId) {
+        UserService.deleteUser(userId);
     }
 
 

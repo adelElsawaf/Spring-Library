@@ -1,16 +1,16 @@
 package org.library.System.User;
 
-import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
-@Data
 @Entity
 @Table(name = "users")
 public class User {
     @Id
+    private final UUID userId = UUID.randomUUID();
     private String userName;
     private String password;
     private String firstName;
@@ -27,7 +27,6 @@ public class User {
         this.setUserName(userName);
         this.setPassword(password);
         this.setType(UserType.valueOf(type.toUpperCase()));
-
     }
 
 
@@ -69,6 +68,11 @@ public class User {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+
+    public UUID getID() {
+        return userId;
     }
 }
 
