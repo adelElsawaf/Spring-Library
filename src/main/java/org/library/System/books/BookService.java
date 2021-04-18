@@ -21,7 +21,7 @@ public class BookService {
         bookRepository.save(recent);
     }
 
-    public static List readAllBooks() {
+    public static List<Book> readAllBooks() {
         List<Book> booksInfo = new ArrayList<>();
         bookRepository.findAll().forEach(booksInfo::add);
         return booksInfo;
@@ -32,11 +32,14 @@ public class BookService {
     }
 
     public static void updateBook(UUID bookId, Book recentBook) {
-        Optional<Book> oldBook = bookRepository.findById(bookId);
-        oldBook.get().setBookName(recentBook.getBookName());
-        oldBook.get().setAuthorName((recentBook.getAuthorName()));
-        oldBook.get().setCategory(recentBook.getCategory());
-        bookRepository.save(oldBook.get());
+        Optional<Book> oldOptionalBook = bookRepository.findById(bookId);
+        if (oldOptionalBook.isPresent()) {
+            Book oldBook = oldOptionalBook.get();
+            oldBook.setBookName(recentBook.getBookName());
+            oldBook.setAuthorName((recentBook.getAuthorName()));
+            oldBook.setCategory(recentBook.getCategory());
+            bookRepository.save(oldBook);
+        }
     }
 
     public static void deleteBook(UUID bookId) {
