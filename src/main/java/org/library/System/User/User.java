@@ -1,11 +1,13 @@
 package org.library.System.User;
 
+ 
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @RestController
 public class UserController {
 
@@ -24,6 +23,7 @@ public class UserController {
     public static void createUser(@RequestBody User recent) {
         UserService.createUser(recent);
     }
+
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}")
     public static void updateUser(@PathVariable UUID userId, @RequestBody User recent) {
