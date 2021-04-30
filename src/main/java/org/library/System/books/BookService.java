@@ -1,5 +1,7 @@
 package org.library.System.books;
 
+import org.library.System.book_rent.BookRentHistory;
+import org.library.System.book_rent.BookRentHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,12 @@ import java.util.UUID;
 @Component
 public class BookService {
     private static BookRepository bookRepository;
+    private static BookRentHistoryRepository bookRentHistoryRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, BookRentHistoryRepository bookRentHistoryRepository) {
         BookService.bookRepository = bookRepository;
+        BookService.bookRentHistoryRepository = bookRentHistoryRepository;
     }
 
     public static void createBook(Book recent) {
@@ -38,11 +42,25 @@ public class BookService {
             oldBook.setBookName(recentBook.getBookName());
             oldBook.setAuthorName((recentBook.getAuthorName()));
             oldBook.setCategory(recentBook.getCategory());
+            oldBook.setRenterId((recentBook.getRenterId()));
+            oldBook.setRentDuration(recentBook.getRentDuration());
             bookRepository.save(oldBook);
         }
     }
 
     public static void deleteBook(UUID bookId) {
         bookRepository.deleteById(bookId);
+    }
+
+    public static void rentBook(UUID bookId, UUID userId, long duration) {
+        Optional<Book> optionalBook = readBook(bookId);
+        if (optionalBook.isPresent()) {
+            Book rentedBook = optionalBook.get();
+            if (rentedBook.getRenterId() == null) {
+                rentedBook.setRenterId(userId);
+                rentedBook.setRentDuration(duration);
+                bookRentHistoryRepository.save(new BookRentHistory(bookId, userId, duration));
+            }
+        }
     }
 }

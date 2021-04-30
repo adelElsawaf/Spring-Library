@@ -1,4 +1,5 @@
-package org.library.System.books;
+package org.library.System.users;
+
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, UUID>{
+public interface UserRepository extends CrudRepository<User, UUID> {
 
 }

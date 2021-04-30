@@ -11,16 +11,46 @@ import java.util.UUID;
 public class Book {
     @Id
     private final UUID bookId = UUID.randomUUID();
+    private UUID RenterId;
     private String bookName;
     private String authorName;
     private String category;
-    public Book(String bookName, String authorName, String category) {
-      this.setBookName(bookName);
-      this.setAuthorName(authorName);
-      this.setCategory(category);
+    private float price;
+    private long rentDuration;
+
+    public Book(String bookName, String authorName, String category, float price, long rentDuration) {
+        this.setBookName(bookName);
+        this.setAuthorName(authorName);
+        this.setCategory(category);
+        this.setPrice(price);
+        this.setRentDuration(rentDuration);
     }
 
     public Book() {
+    }
+
+    public long getRentDuration() {
+        return rentDuration;
+    }
+
+    public void setRentDuration(long rentDuration) {
+        this.rentDuration = rentDuration;
+    }
+
+    public UUID getRenterId() {
+        return RenterId;
+    }
+
+    public void setRenterId(UUID renterId) {
+        this.RenterId = renterId;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public UUID getBookId() {
