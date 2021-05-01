@@ -44,6 +44,7 @@ public class BookService {
             oldBook.setCategory(recentBook.getCategory());
             oldBook.setRenterId((recentBook.getRenterId()));
             oldBook.setRentDuration(recentBook.getRentDuration());
+            oldBook.setPrice((recentBook.getPrice()));
             bookRepository.save(oldBook);
         }
     }
@@ -59,7 +60,7 @@ public class BookService {
             if (rentedBook.getRenterId() == null) {
                 rentedBook.setRenterId(userId);
                 rentedBook.setRentDuration(duration);
-                bookRentHistoryRepository.save(new BookRentHistory(bookId, userId, duration));
+                bookRentHistoryRepository.save(new BookRentHistory(bookId, userId, duration,rentedBook.getPrice()));
             }
         }
     }

@@ -1,6 +1,5 @@
 package org.library.System.book_rent;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,18 +13,28 @@ public class BookRentHistory {
     private final UUID rentId = UUID.randomUUID();
     private UUID bookId;
     private UUID userId;
+    private float rentPrice;
     private LocalDate startRentingDate = LocalDate.now();
     private long rentDurationInDays;
     private LocalDate endRentingDate;
 
-    public BookRentHistory(UUID bookId, UUID userId, long rentDurationInDays) {
+    public BookRentHistory(UUID bookId, UUID userId, long rentDurationInDays, float rentPrice) {
         this.bookId = bookId;
         this.userId = userId;
         this.rentDurationInDays = rentDurationInDays;
         this.endRentingDate = startRentingDate.plusDays(rentDurationInDays);
+        this.rentPrice = rentPrice;
     }
 
     public BookRentHistory() {
+    }
+
+    public float getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(long rentPrice) {
+        this.rentPrice = rentPrice;
     }
 
     public UUID getRentId() {
