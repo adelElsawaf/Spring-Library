@@ -7,29 +7,30 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/books")
 public class BookController {
-    @RequestMapping("/books")
+    @GetMapping("/")
     public static List<Book> readAllBooks() {
         return BookService.readAllBooks();
     }
 
-    @RequestMapping("/books/{bookId}")
-    public static Optional<Book> readBook(@PathVariable UUID bookId) {
+    @GetMapping("/{bookId}")
+    public Optional<Book> readBook(@PathVariable UUID bookId) {
         return BookService.readBook(bookId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/books")
-    public static void createBook(@RequestBody Book recent) {
+    @PostMapping("/")
+    public void createBook(@RequestBody Book recent) {
         BookService.createBook(recent);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "books/{bookId")
-    public static void updateBook(@PathVariable UUID bookId, @RequestBody Book recent) {
+    @PutMapping("/{bookId")
+    public void updateBook(@PathVariable UUID bookId, @RequestBody Book recent) {
         BookService.updateBook(bookId, recent);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/books/{bookId}")
-    public static void delete(@PathVariable UUID bookId) {
+    @DeleteMapping("/{bookId}")
+    public void delete(@PathVariable UUID bookId) {
         BookService.deleteBook(bookId);
     }
 }

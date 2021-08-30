@@ -1,4 +1,4 @@
-package org.library.System.User;
+package org.library.System.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
