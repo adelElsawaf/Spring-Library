@@ -25,9 +25,9 @@ dependencies {
     compile "org.flywaydb:flyway-core:7.7.1"
 }
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/postgres'
-    user = 'postgres'
-    password = 'mysecretpassword'
+    url = 'jdbc:postgresql://ec2-3-230-61-252.compute-1.amazonaws.com:5432/dca2pk034v7sgs'
+    user = 'ylvzetyzezootx'
+    password = 'df46515cb9c3b4b09d5120d95b9290ae8f849dab1843f8567a1199a194c9957d'
 }
 
 
