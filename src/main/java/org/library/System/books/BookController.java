@@ -1,5 +1,6 @@
 package org.library.System.books;
 
+import org.library.System.users.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,5 +33,11 @@ public class BookController {
     @DeleteMapping("/{bookId}")
     public void delete(@PathVariable UUID bookId) {
         BookService.deleteBook(bookId);
+    }
+
+    @PostMapping("/rent/{renterId}/{bookName}/{rentDuration}")
+    public String rent(@PathVariable UUID renterId,@PathVariable String bookName,@PathVariable long rentDuration)
+    {
+         return BookService.rentBook(renterId,bookName,rentDuration);
     }
 }
