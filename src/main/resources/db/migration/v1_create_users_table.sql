@@ -1,8 +1,11 @@
-create table users (
-user_id uuid primary key ,
-password varchar(100) not null,
-first_name varchar(100) not null,
-last_name varchar(100) not null,
-user_type varchar(100) not null
-)
+
+CREATE TABLE public.users (
+	user_id uuid NOT NULL,
+	first_name varchar(255) NULL,
+	last_name varchar(255) NULL,
+	"password" varchar(255) NULL,
+	"type" int4 NULL,
+	user_name varchar(255) NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (user_id)
+);
 commit

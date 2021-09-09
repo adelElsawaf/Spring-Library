@@ -10,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("/books")
 public class BookController {
     @GetMapping("/")
-    public static List<Book> readAllBooks() {
+    public  List<Book> readAllBooks() {
         return BookService.readAllBooks();
     }
 
@@ -24,7 +24,7 @@ public class BookController {
         BookService.createBook(recent);
     }
 
-    @PutMapping("/{bookId")
+    @PutMapping("/{bookId}")
     public void updateBook(@PathVariable UUID bookId, @RequestBody Book recent) {
         BookService.updateBook(bookId, recent);
     }
