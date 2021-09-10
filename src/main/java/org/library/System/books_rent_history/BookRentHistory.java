@@ -17,6 +17,7 @@ public class BookRentHistory {
     private LocalDate startRentingDate;
     private long rentDurationInDays;
     private LocalDate endRentingDate;
+
     public BookRentHistory() {
     }
 

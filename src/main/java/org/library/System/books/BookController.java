@@ -1,6 +1,5 @@
 package org.library.System.books;
 
-import org.library.System.users.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("/books")
 public class BookController {
     @GetMapping("/")
-    public  List<Book> readAllBooks() {
+    public List<Book> readAllBooks() {
         return BookService.readAllBooks();
     }
 
@@ -36,8 +35,7 @@ public class BookController {
     }
 
     @PostMapping("/rent/{renterId}/{bookName}/{rentDuration}")
-    public String rent(@PathVariable UUID renterId,@PathVariable String bookName,@PathVariable long rentDuration)
-    {
-         return BookService.rentBook(renterId,bookName,rentDuration);
+    public String rent(@PathVariable UUID renterId, @PathVariable String bookName, @PathVariable long rentDuration) {
+        return BookService.rentBook(renterId, bookName, rentDuration);
     }
 }
