@@ -63,4 +63,18 @@ public class BookService {
             return "book Rented successfully";
         }
     }
+    public static String deleteRent(UUID renterId,String bookName)
+    {
+       Book rentedBook = bookRepository.getRentedBook(renterId,bookName);
+       if (rentedBook == null)
+       {
+           return "There is no book with this name rented to this user";
+       }
+       else
+       {
+          rentedBook.setRenterID(null);
+          BookService.updateBook(rentedBook.getBookId(),rentedBook);
+          return "Rent deleted successfully";
+       }
+    }
 }

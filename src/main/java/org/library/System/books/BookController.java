@@ -38,4 +38,9 @@ public class BookController {
     public String rent(@PathVariable UUID renterId, @PathVariable String bookName, @PathVariable long rentDuration) {
         return BookService.rentBook(renterId, bookName, rentDuration);
     }
+    @PutMapping("/rent/delete/{renterId}/{bookName}")
+    public String deleteRent(@PathVariable UUID renterId,@PathVariable String bookName)
+    {
+        return BookService.deleteRent(renterId, bookName);
+    }
 }
