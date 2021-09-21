@@ -16,8 +16,7 @@ public class Book {
     private String authorName;
     private String category;
     private float rentPrice;
-    @Column(name = "renter_id")
-    private UUID renterID;
+
 
     public Book(String bookName, String authorName, String category, float rentPrice) {
         this.bookName = bookName;
@@ -35,14 +34,6 @@ public class Book {
 
     public void setRentPrice(float rentPrice) {
         this.rentPrice = rentPrice;
-    }
-
-    public UUID getRenterID() {
-        return renterID;
-    }
-
-    public void setRenterID(UUID renterID) {
-        this.renterID = renterID;
     }
 
     public UUID getBookId() {

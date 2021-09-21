@@ -39,8 +39,8 @@ public class BookController {
         return BookService.rentBook(renterId, bookName, rentDuration);
     }
     @PutMapping("/rent/delete/{renterId}/{bookName}")
-    public String deleteRent(@PathVariable UUID renterId,@PathVariable String bookName)
+    public void deleteRent(@PathVariable UUID rentId)
     {
-        return BookService.deleteRent(renterId, bookName);
+         BookService.deleteRent(rentId);
     }
 }

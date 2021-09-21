@@ -1,10 +1,12 @@
 package org.library.System.books;
 
 import org.library.System.books_rent_history.BookRentHistory;
+import org.library.System.books_rent_history.BookRentHistoryRepository;
 import org.library.System.books_rent_history.BookRentHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +15,12 @@ import java.util.UUID;
 @Component
 public class BookService {
     private static BookRepository bookRepository;
+    private static BookRentHistoryRepository bookRentHistoryRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository,BookRentHistoryRepository bookRentHistoryRepository) {
         BookService.bookRepository = bookRepository;
+        BookService.bookRentHistoryRepository = bookRentHistoryRepository;
     }
 
     public static void createBook(Book recent) {
@@ -41,7 +45,6 @@ public class BookService {
             oldBook.setAuthorName((recentBook.getAuthorName()));
             oldBook.setCategory(recentBook.getCategory());
             oldBook.setRentPrice(recentBook.getRentPrice());
-            oldBook.setRenterID(recentBook.getRenterID());
             bookRepository.save(oldBook);
         }
     }
@@ -52,29 +55,17 @@ public class BookService {
 
     public static String rentBook(UUID renterID, String bookName, long rentDuration) {
         Book rentedBook = bookRepository.getBookByName(bookName);
+        UUID rentId = bookRentHistoryRepository.getRentInDateRange(LocalDate.now(),bookName);
         if (rentedBook == null) {
             return "Book doesn't exist ";
-        } else if (rentedBook.getRenterID() != null) {
+        } else if (rentId != null) {
             return "Book is already rented";
         } else {
-            rentedBook.setRenterID(renterID);
-            BookService.updateBook(rentedBook.getBookId(), rentedBook);
             BookRentHistoryService.create(new BookRentHistory(rentedBook.getBookId(), renterID, rentDuration, rentedBook.getRentPrice()));
             return "book Rented successfully";
         }
     }
-    public static String deleteRent(UUID renterId,String bookName)
-    {
-       Book rentedBook = bookRepository.getRentedBook(renterId,bookName);
-       if (rentedBook == null)
-       {
-           return "There is no book with this name rented to this user";
-       }
-       else
-       {
-          rentedBook.setRenterID(null);
-          BookService.updateBook(rentedBook.getBookId(),rentedBook);
-          return "Rent deleted successfully";
-       }
+    public static void deleteRent(UUID rentId) {
+    BookRentHistoryService.delete(rentId);
     }
 }
