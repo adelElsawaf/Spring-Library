@@ -20,9 +20,10 @@ public class BookRentHistoryService {
     public static void create(BookRentHistory bookRentInformation) {
         bookRentHistoryRepository.save(bookRentInformation);
     }
-    public static void delete(UUID rentId)
-    {
+
+    public static void delete(UUID rentId) {
         bookRentHistoryRepository.deleteById(rentId);
     }
+
 
 }

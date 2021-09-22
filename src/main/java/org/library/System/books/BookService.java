@@ -55,17 +55,14 @@ public class BookService {
 
     public static String rentBook(UUID renterID, String bookName, long rentDuration) {
         Book rentedBook = bookRepository.getBookByName(bookName);
-        UUID rentId = bookRentHistoryRepository.getRentInDateRange(LocalDate.now(),bookName);
+        BookRentHistory rent = bookRentHistoryRepository.getRentInDateRange(LocalDate.now(),bookName);
         if (rentedBook == null) {
             return "Book doesn't exist ";
-        } else if (rentId != null) {
+        } else if (rent != null) {
             return "Book is already rented";
         } else {
             BookRentHistoryService.create(new BookRentHistory(rentedBook.getBookId(), renterID, rentDuration, rentedBook.getRentPrice()));
             return "book Rented successfully";
         }
-    }
-    public static void deleteRent(UUID rentId) {
-    BookRentHistoryService.delete(rentId);
     }
 }

@@ -1,5 +1,7 @@
 package org.library.System.books;
 
+import org.library.System.books_rent_history.BookRentHistory;
+import org.library.System.books_rent_history.BookRentHistoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,9 +40,9 @@ public class BookController {
     public String rent(@PathVariable UUID renterId, @PathVariable String bookName, @PathVariable long rentDuration) {
         return BookService.rentBook(renterId, bookName, rentDuration);
     }
-    @PutMapping("/rent/delete/{renterId}/{bookName}")
+    @PutMapping("/rent/{rentId}")
     public void deleteRent(@PathVariable UUID rentId)
     {
-         BookService.deleteRent(rentId);
+         BookRentHistoryService.delete(rentId);
     }
 }
