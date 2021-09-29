@@ -14,13 +14,24 @@ public class Book {
     private String bookName;
     private String authorName;
     private String category;
-    public Book(String bookName, String authorName, String category) {
-      this.setBookName(bookName);
-      this.setAuthorName(authorName);
-      this.setCategory(category);
+    private float rentPrice;
+
+    public Book(String bookName, String authorName, String category, float rentPrice) {
+        this.setBookName(bookName);
+        this.setAuthorName(authorName);
+        this.setCategory(category);
+        this.setRentPrice(rentPrice);
     }
 
     public Book() {
+    }
+
+    public float getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(float rentPrice) {
+        this.rentPrice = rentPrice;
     }
 
     public UUID getBookId() {
