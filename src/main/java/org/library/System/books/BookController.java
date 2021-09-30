@@ -32,4 +32,9 @@ public class BookController {
     public static void delete(@PathVariable UUID bookId) {
         BookService.deleteBook(bookId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "books/rent/{userId}/{bookName}/{duration}")
+    public static void rent(@PathVariable UUID userId, @PathVariable String bookName, @PathVariable long duration) {
+        BookService.rent(userId, bookName, duration);
+    }
 }

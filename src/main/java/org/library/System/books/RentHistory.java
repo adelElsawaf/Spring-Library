@@ -9,11 +9,17 @@ import java.util.UUID;
 public class RentHistory {
     @Id
     private final UUID rentId = UUID.randomUUID();
+    @Column(name = "book_id")
+    private UUID bookId;
     private String bookName;
+    @Column(name = "user_id")
     private UUID userId;
     private String userName;
-    private LocalDate startRentingDate = LocalDate.now();
+    @Column(name = "start_renting_date")
+    private LocalDate startRentingDate;
+    @Column(name = "end_renting_date")
     private LocalDate endRentingDate;
+    @Column(name = "rent_price")
     private double rentPrice;
 
     public RentHistory() {
@@ -45,7 +51,6 @@ public class RentHistory {
         this.rentPrice = rentPrice;
     }
 
-    private UUID bookId;
 
     public UUID getRentId() {
         return rentId;
