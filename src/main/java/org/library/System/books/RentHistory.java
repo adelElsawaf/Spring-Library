@@ -14,26 +14,36 @@ public class RentHistory {
     private String userName;
     private LocalDate startRentingDate = LocalDate.now();
     private LocalDate endRentingDate;
+    private double rentPrice;
 
     public RentHistory() {
     }
 
-    public RentHistory(UUID userId, LocalDate startRentingDate, LocalDate endRentingDate, UUID bookId) {
+    public RentHistory(UUID userId, LocalDate startRentingDate, LocalDate endRentingDate, UUID bookId, double rentPrice) {
         this.userId = userId;
         this.startRentingDate = startRentingDate;
         this.endRentingDate = endRentingDate;
         this.bookId = bookId;
+        this.rentPrice = rentPrice;
     }
 
-    public RentHistory(UUID bookId, String bookName, UUID userId, String userName, LocalDate startRentingDate, LocalDate endRentingDate) {
+    public RentHistory(UUID bookId, String bookName, UUID userId, String userName, LocalDate startRentingDate, LocalDate endRentingDate, double rentPrice) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.userId = userId;
         this.userName = userName;
         this.startRentingDate = startRentingDate;
         this.endRentingDate = endRentingDate;
+        this.rentPrice = rentPrice;
     }
 
+    public double getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(double rentPrice) {
+        this.rentPrice = rentPrice;
+    }
 
     private UUID bookId;
 
