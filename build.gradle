@@ -20,6 +20,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
     implementation group: 'com.fasterxml.uuid', name: 'java-uuid-generator', version: '3.1.0'
+    implementation group: 'io.springfox',name :'springfox-swagger2',version:'2.9.2'
+    implementation group: 'io.springfox',name :'springfox-swagger-ui',version:'2.9.2'
     implementation 'org.projectlombok:lombok:1.18.16'
     runtimeOnly 'org.postgresql:postgresql'
     compile "org.flywaydb:flyway-core:7.7.1"
