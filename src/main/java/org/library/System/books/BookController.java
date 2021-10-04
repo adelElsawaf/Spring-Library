@@ -1,5 +1,6 @@
 package org.library.System.books;
 
+import org.library.System.rents.RentHistory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class BookController {
         BookService.deleteBook(bookId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "books/rent/{userId}/{bookName}/{duration}")
-    public static void rent(@PathVariable UUID userId, @PathVariable String bookName, @PathVariable long duration) {
-        BookService.rent(userId, bookName, duration);
+    @RequestMapping(method = RequestMethod.POST, value = "books/rent/{duration}")
+    public static void rent(@RequestBody RentHistory obj, @PathVariable long duration) {
+        BookService.rent(obj.getUserId(), obj.getBookId(),duration);
     }
 }

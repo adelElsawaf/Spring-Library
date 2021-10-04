@@ -1,5 +1,6 @@
-package org.library.System.books;
+package org.library.System.rents;
 
+import org.library.System.rents.RentHistory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,6 @@ public interface RentHistoryRepository extends CrudRepository<RentHistory, UUID>
             "where \n" +
             "?1 between start_renting_date and end_renting_date \n" +
             "and \n" +
-            "?2 = books.book_name ",nativeQuery = true)
-    RentHistory getRentInDateRange(LocalDate now , String bookName);
+            "?2 = books.book_id ",nativeQuery = true)
+    RentHistory getRentInDateRange(LocalDate now , UUID bookName);
 }

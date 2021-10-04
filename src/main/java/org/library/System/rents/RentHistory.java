@@ -1,4 +1,4 @@
-package org.library.System.books;
+package org.library.System.rents;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,17 +9,10 @@ import java.util.UUID;
 public class RentHistory {
     @Id
     private final UUID rentId = UUID.randomUUID();
-    @Column(name = "book_id")
     private UUID bookId;
-    private String bookName;
-    @Column(name = "user_id")
     private UUID userId;
-    private String userName;
-    @Column(name = "start_renting_date")
     private LocalDate startRentingDate;
-    @Column(name = "end_renting_date")
     private LocalDate endRentingDate;
-    @Column(name = "rent_price")
     private double rentPrice;
 
     public RentHistory() {
@@ -33,15 +26,6 @@ public class RentHistory {
         this.rentPrice = rentPrice;
     }
 
-    public RentHistory(UUID bookId, String bookName, UUID userId, String userName, LocalDate startRentingDate, LocalDate endRentingDate, double rentPrice) {
-        this.bookId = bookId;
-        this.bookName = bookName;
-        this.userId = userId;
-        this.userName = userName;
-        this.startRentingDate = startRentingDate;
-        this.endRentingDate = endRentingDate;
-        this.rentPrice = rentPrice;
-    }
 
     public double getRentPrice() {
         return rentPrice;
@@ -64,14 +48,6 @@ public class RentHistory {
         this.bookId = bookId;
     }
 
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
     public UUID getUserId() {
         return userId;
     }
@@ -80,13 +56,6 @@ public class RentHistory {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public LocalDate getStartRentingDate() {
         return startRentingDate;

@@ -1,6 +1,7 @@
 package org.library.System.books;
 
-import org.library.System.User.User;
+import org.library.System.rents.RentHistory;
+import org.library.System.rents.RentHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,15 +51,15 @@ public class BookService {
         bookRepository.deleteById(bookId);
     }
 
-    public static String rent(UUID renterId, String bookName, long rentDuration) {
-        Book neededBook = bookRepository.getBookByName(bookName);
-        RentHistory rentedBook = rentHistoryRepository.getRentInDateRange(LocalDate.now(), bookName);
+    public static String rent(UUID userId, UUID bookId, long rentDuration) {
+        Optional<Book> neededBook = bookRepository.findById(bookId) ;
+        RentHistory rentedBook = rentHistoryRepository.getRentInDateRange(LocalDate.now(), bookId);
         if (neededBook == null) {
             return "there is no book  by this name ";
         } else if (rentedBook != null) {
             return "Book is already rented";
         } else {
-            rentHistoryRepository.save(new RentHistory(renterId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), neededBook.getBookId(), neededBook.getRentPrice()));
+            rentHistoryRepository.save(new RentHistory(userId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), neededBook.get().getBookId(), neededBook.get().getRentPrice()));
             return "book rented successfully";
         }
     }
