@@ -35,7 +35,17 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "books/rent/{duration}")
-    public static void rent(@RequestBody RentHistory obj, @PathVariable long duration) {
-        BookService.rent(obj.getUserId(), obj.getBookId(),duration);
+    public void rent(@RequestBody RentHistory obj, @PathVariable long duration) {
+        BookService.rent(obj.getUserId(), obj.getBookId(), duration);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "books/rent/{userId}/{rentId}")
+    public Optional<RentHistory> getRent(@PathVariable UUID userId, @PathVariable UUID rentId) {
+        return BookService.getRent(userId, rentId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "rent/{userId}/{rentId}/")
+    public Object getUserAndBookInRent(@PathVariable UUID userId, @PathVariable UUID rentId) {
+        return BookService.x(userId, rentId);
     }
 }
