@@ -1,6 +1,5 @@
 package org.library.System.rents;
 
-import org.library.System.rents.RentHistory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Repository
-public interface RentHistoryRepository extends CrudRepository<RentHistory, UUID> {
+public interface RentRepository extends CrudRepository<Rent, UUID> {
     @Query(value = "select *  from books_rent_history \n" +
             "inner join books \n" +
             "on books_rent_history.book_id  = books.book_id \n" +
@@ -17,5 +16,5 @@ public interface RentHistoryRepository extends CrudRepository<RentHistory, UUID>
             "?1 between start_renting_date and end_renting_date \n" +
             "and \n" +
             "?2 = books.book_id ",nativeQuery = true)
-    RentHistory getRentInDateRange(LocalDate now , UUID bookName);
+    Rent getRentInDateRange(LocalDate now , UUID bookName);
 }

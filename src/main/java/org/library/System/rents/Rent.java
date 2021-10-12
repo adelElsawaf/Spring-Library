@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "books_rent_history")
-public class RentHistory {
+public class Rent {
     @Id
     private final UUID rentId = UUID.randomUUID();
     private UUID bookId;
@@ -15,10 +15,10 @@ public class RentHistory {
     private LocalDate endRentingDate;
     private double rentPrice;
 
-    public RentHistory() {
+    public Rent() {
     }
 
-    public RentHistory(UUID userId, LocalDate startRentingDate, LocalDate endRentingDate, UUID bookId, double rentPrice) {
+    public Rent(UUID userId, LocalDate startRentingDate, LocalDate endRentingDate, UUID bookId, double rentPrice) {
         this.userId = userId;
         this.startRentingDate = startRentingDate;
         this.endRentingDate = endRentingDate;

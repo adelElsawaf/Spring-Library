@@ -2,8 +2,8 @@ package org.library.System.books;
 
 import org.library.System.User.User;
 import org.library.System.User.UserService;
-import org.library.System.rents.RentHistory;
-import org.library.System.rents.RentHistoryRepository;
+import org.library.System.rents.Rent;
+import org.library.System.rents.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +13,10 @@ import java.util.*;
 @Component
 public class BookService {
     private static BookRepository bookRepository;
-    private static RentHistoryRepository rentHistoryRepository;
+    private static RentRepository rentHistoryRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, RentHistoryRepository rentHistoryRepository) {
+    public BookService(BookRepository bookRepository, RentRepository rentHistoryRepository) {
         BookService.bookRepository = bookRepository;
         BookService.rentHistoryRepository = rentHistoryRepository;
     }
@@ -52,18 +52,18 @@ public class BookService {
 
     public static String rent(UUID userId, UUID bookId, long rentDuration) {
         Optional<Book> neededBook = bookRepository.findById(bookId);
-        RentHistory rentedBook = rentHistoryRepository.getRentInDateRange(LocalDate.now(), bookId);
+        Rent rentedBook = rentHistoryRepository.getRentInDateRange(LocalDate.now(), bookId);
         if (neededBook == null) {
             return "there is no book  by this name ";
         } else if (rentedBook != null) {
             return "Book is already rented";
         } else {
-            rentHistoryRepository.save(new RentHistory(userId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), bookId, neededBook.get().getRentPrice()));
+            rentHistoryRepository.save(new Rent(userId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), bookId, neededBook.get().getRentPrice()));
             return "book rented successfully";
         }
     }
 
-    public static Optional<RentHistory> getRent(UUID userId, UUID rentId) {
+    public static Optional<Rent> getRent(UUID userId, UUID rentId) {
         return rentHistoryRepository.findById(rentId);
     }
 
