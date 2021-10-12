@@ -4,6 +4,7 @@ import org.library.System.User.User;
 import org.library.System.User.UserService;
 import org.library.System.rents.Rent;
 import org.library.System.rents.RentRepository;
+import org.library.System.rents.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,27 +59,9 @@ public class BookService {
         } else if (rentedBook != null) {
             return "Book is already rented";
         } else {
-            rentHistoryRepository.save(new Rent(userId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), bookId, neededBook.get().getRentPrice()));
+            RentService.create(new Rent(userId, LocalDate.now(), LocalDate.now().plusDays(rentDuration), bookId, neededBook.get().getRentPrice()));
             return "book rented successfully";
         }
     }
 
-    public static Optional<Rent> getRent(UUID userId, UUID rentId) {
-        return rentHistoryRepository.findById(rentId);
-    }
-
-    public static Optional<User> getUserInRent(UUID rentId)
-    {
-         UUID userId = rentHistoryRepository.findById(rentId).get().getUserId();
-         return UserService.readUser(userId);
-    }
-    public static Optional<Book> getBookInRent(UUID rentId)
-    {
-        UUID bookId = rentHistoryRepository.findById(rentId).get().getBookId();
-        return BookService.readBook(bookId);
-    }
-    public static List<Object> x (UUID userId,UUID rentId)
-    {
-       return Arrays.asList(new Optional[]{BookService.getBookInRent(rentId), BookService.getUserInRent(rentId)});
-    }
 }

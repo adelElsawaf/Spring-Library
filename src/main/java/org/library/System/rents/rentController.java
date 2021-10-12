@@ -1,5 +1,6 @@
 package org.library.System.rents;
 
+import org.library.System.books.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -8,13 +9,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/rent")
 public class rentController {
-    @GetMapping("/")
-    public Optional<Rent> read(@PathVariable UUID rentId){
+    @GetMapping("/{rentId}")
+    public Optional<Rent> read(@PathVariable UUID rentId) {
         return RentService.read(rentId);
     }
-    @PostMapping("/")
-    public void create(@RequestBody Rent recent)
-    {
-        RentService.create(recent);
+
+    @PostMapping("/{duration}")
+    public String create(@RequestBody Rent recent, @PathVariable long duration) {
+        return BookService.rent(recent.getUserId(), recent.getBookId(), duration);
     }
 }
