@@ -14,12 +14,12 @@ import java.util.*;
 @Component
 public class BookService {
     private static BookRepository bookRepository;
-    private static RentRepository rentHistoryRepository;
+    private static RentRepository rentRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, RentRepository rentHistoryRepository) {
+    public BookService(BookRepository bookRepository, RentRepository rentRepository) {
         BookService.bookRepository = bookRepository;
-        BookService.rentHistoryRepository = rentHistoryRepository;
+        BookService.rentRepository = rentRepository;
     }
 
     public static void createBook(Book recent) {
@@ -53,7 +53,7 @@ public class BookService {
 
     public static String rent(UUID userId, UUID bookId, long rentDuration) {
         Optional<Book> neededBook = bookRepository.findById(bookId);
-        Rent rentedBook = rentHistoryRepository.getRentInDateRange(LocalDate.now(), bookId);
+        Rent rentedBook = rentRepository.getRentInDateRange(LocalDate.now(), bookId);
         if (neededBook == null) {
             return "there is no book  by this name ";
         } else if (rentedBook != null) {
