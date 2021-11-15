@@ -1,6 +1,7 @@
 package org.library.System.books;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ public class Book {
     private String bookName;
     private String authorName;
     private String category;
+    @Column(name = "rent_price")
     private float rentPrice;
 
     public Book(String bookName, String authorName, String category, float rentPrice) {
