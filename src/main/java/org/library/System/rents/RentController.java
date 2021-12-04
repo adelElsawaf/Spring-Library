@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rent")
-public class rentController {
+public class RentController {
     @GetMapping("/{rentId}")
     public Optional<Rent> read(@PathVariable UUID rentId) {
         return RentService.read(rentId);
@@ -17,5 +17,9 @@ public class rentController {
     @PostMapping("/{duration}")
     public String create(@RequestBody Rent recent, @PathVariable long duration) {
         return BookService.rent(recent.getUserId(), recent.getBookId(), duration);
+    }
+    @DeleteMapping("/{rentId}")
+    public void delete(@PathVariable UUID rentId){
+        RentService.delete(rentId);
     }
 }

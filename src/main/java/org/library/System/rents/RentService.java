@@ -22,4 +22,7 @@ public class RentService {
     public static Optional<Rent> read(UUID rentId) {
         return rentRepository.findById(rentId);
     }
+    public static void delete(UUID rentId){
+        rentRepository.deleteById(rentId);
+    }
 }

@@ -16,5 +16,5 @@ public interface RentRepository extends CrudRepository<Rent, UUID> {
             "?1 between start_renting_date and end_renting_date \n" +
             "and \n" +
             " books.book_id = ?2",nativeQuery = true)
-    Rent getRentInDateRange(LocalDate now , UUID bookName);
+    Rent getRentInDateRange(LocalDate now , UUID bookId);
 }

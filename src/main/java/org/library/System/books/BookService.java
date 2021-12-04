@@ -54,7 +54,7 @@ public class BookService {
     public static String rent(UUID userId, UUID bookId, long rentDuration) {
         Optional<Book> neededBook = bookRepository.findById(bookId);
         Rent rentedBook = rentRepository.getRentInDateRange(LocalDate.now(), bookId);
-        if (neededBook == null) {
+        if (neededBook.isPresent() == false) {
             return "there is no book  by this name ";
         } else if (rentedBook != null) {
             return "Book is already rented";
