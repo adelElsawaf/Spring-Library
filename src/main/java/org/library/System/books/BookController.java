@@ -32,4 +32,5 @@ public class BookController {
     public static void delete(@PathVariable UUID bookId) {
         BookService.deleteBook(bookId);
     }
+
 }

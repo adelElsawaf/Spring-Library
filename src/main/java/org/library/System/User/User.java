@@ -1,6 +1,7 @@
 package org.library.System.User;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,6 +16,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    @Column(name = "user_type")
     private UserType type;
 
     public User() {
