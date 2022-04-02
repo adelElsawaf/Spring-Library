@@ -8,32 +8,45 @@ import java.util.UUID;
 
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
+    private static Boolean isDataNotValid(Object Data) {
+        return Data == null;
+    }
 
-    @RequestMapping("/users")
+    @RequestMapping("/")
     public static List<User> readAllUsers() {
         return UserService.readAllUsers();
     }
 
-    @RequestMapping("/users/{userId}")
+    @RequestMapping("/{userId}")
     public static Optional<User> readUser(@PathVariable UUID userId) {
         return UserService.readUser(userId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users")
+    @PostMapping("/users")
     public static void createUser(@RequestBody User recent) {
         UserService.createUser(recent);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}")
+    @PutMapping("/{userId}")
     public static void updateUser(@PathVariable UUID userId, @RequestBody User recent) {
         UserService.updateUser(userId, recent);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}")
+    @DeleteMapping("/{userId}")
     public static void delete(@PathVariable UUID userId) {
         UserService.deleteUser(userId);
     }
 
-
+    @PostMapping("/login")
+    public Object logIn(@RequestBody User user) {
+        if (isDataNotValid(user.getUserName())) {
+            return "empty user name field";
+        } else if (isDataNotValid(user.getPassword())) {
+            return "empty password field";
+        } else {
+            return UserService.logIn(user.getUserName(), user.getPassword());
+        }
+    }
 }

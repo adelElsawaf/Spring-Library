@@ -3,10 +3,7 @@ package org.library.System.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class UserService {
@@ -47,5 +44,18 @@ public class UserService {
 
     public static void deleteUser(UUID userId) {
         userRepository.deleteById(userId);
+    }
+
+    public static Object logIn(String userName, String password) {
+        User loggedInUser = userRepository.findByUserName(userName);
+        if (loggedInUser == null) {
+            return "user name doest exist";
+        } else {
+            if (!Objects.equals(loggedInUser.getPassword(), password)) {
+                return "Wrong password";
+            } else {
+                return loggedInUser;
+            }
+        }
     }
 }
